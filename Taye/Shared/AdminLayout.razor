@@ -1,0 +1,51 @@
+﻿@namespace Taye
+@inherits LayoutComponentBase
+@using System.Text.Json
+
+<AntDesign.ProLayout.BasicLayout MenuData="_menuData" Title="太一的后台管理">
+    <RightContentRender>
+        <Taye.Components.RightContent />
+    </RightContentRender>
+    <ChildContent>
+        @Body
+    </ChildContent>
+    <FooterRender>
+        <FooterView Copyright="2021 Ant Design Blazor" Links="Links"></FooterView>
+    </FooterRender>
+</AntDesign.ProLayout.BasicLayout>
+<SettingDrawer />
+
+@code
+{
+    private MenuDataItem[] _menuData = { new MenuDataItem { Path = "/admin/login", Name = "Dashboard", Key = "dashboard", Icon = "dashboard" } };
+
+    protected override async Task OnInitializedAsync()
+    {
+        await base.OnInitializedAsync();
+    }
+
+    public LinkItem[] Links { get; set; } =
+                {
+        new LinkItem
+        {
+            Key = "Ant Design Blazor",
+            Title = "Ant Design Blazor",
+            Href = "https://antblazor.com",
+            BlankTarget = true,
+        },
+        new LinkItem
+        {
+            Key = "github",
+            Title = "github",
+            Href = "https://github.com/ant-design-blazor/ant-design-pro-blazor",
+            BlankTarget = true,
+        },
+        new LinkItem
+        {
+            Key = "Blazor",
+            Title = "Blazor",
+            Href = "https://dotnet.microsoft.com/apps/aspnet/web-apps/blazor?WT.mc_id=DT-MVP-5003987",
+            BlankTarget = true,
+        }
+    };
+}

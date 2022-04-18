@@ -1,0 +1,108 @@
+﻿@inherits LayoutComponentBase
+
+<PageTitle>Taye</PageTitle>
+
+<div class="page">
+    <main>
+        <AntDesign.Layout>
+            <Header>
+                <div class="logo">
+                    <a href="#" class="d-flex align-items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none"
+                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                             class="mr-2">
+                            <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z">
+                            </path>
+                            <circle cx="12" cy="13" r="4"></circle>
+                        </svg>
+                        <font size="3">李太一的小破站</font>
+                    </a>
+                </div>
+                <Menu Theme="MenuTheme.Dark" Mode="MenuMode.Horizontal" DefaultSelectedKeys=@(new[]{"video"})>
+                    <MenuItem Key="home" RouterLink="/">站点简介</MenuItem>
+                    <MenuItem Key="pic" RouterLink="image">照 片</MenuItem>
+                    <MenuItem Key="video" RouterLink="fetchdata">视 频</MenuItem>
+                </Menu>
+            </Header>
+            <Content Style="padding: 50px 50px;">
+                <article class="content px-4">
+                    @Body
+                </article>
+            </Content>
+            <Footer Class="footer">
+                <MainFooter></MainFooter>
+            </Footer>
+        </AntDesign.Layout>
+
+    </main>
+</div>
+
+@*<div class="page">
+    <main>
+    <header>
+    <div class="bg-dark collapse" id="navbarHeader">
+    <div class="container">
+    <div class="row">
+    <div class="col-sm-8 py-4">
+    <h4 class="text-white">楚辞·九歌·东皇太一</h4>
+    <p class="text-muted">吉日兮辰良，穆将愉兮上皇。抚长剑兮玉珥，璆锵鸣兮琳琅。</p>
+    <p class="text-muted">瑶席兮玉瑱，盍将把兮琼芳。蕙肴蒸兮兰藉，奠桂酒兮椒浆。</p>
+    <p class="text-muted">扬枹兮拊鼓，疏缓节兮安歌，陈竽瑟兮浩倡。</p>
+    <p class="text-muted">灵偃蹇兮姣服，芳菲菲兮满堂。五音纷兮繁会，君欣欣兮乐康。</p>
+    </div>
+    {#                <div class="col-sm-4 py-4">
+    #}
+    {#                    <h4 class="text-white">Contact</h4>#}
+    {#                    <ul class="list-unstyled">
+    #}
+    {#
+    <li><a href="#" class="text-white">Follow on Twitter</a></li>#}
+    {#
+    <li><a href="#" class="text-white">Like on Facebook</a></li>#}
+    {#
+    <li><a href="#" class="text-white">Email me</a></li>#}
+    {#
+    </ul>#}
+    {#
+    </div>#}
+    </div>
+    </div>
+    </div>
+    <div class="navbar navbar-dark bg-dark">
+    <div class="container d-flex justify-content-between">
+    <a href="#" class="navbar-brand d-flex align-items-center">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+    class="mr-2">
+    <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z">
+    </path>
+    <circle cx="12" cy="13" r="4"></circle>
+    </svg>
+    <strong>前尘忆梦</strong>
+    </a>
+    <button class="navbar-toggler collapsed" type="button" data-toggle="collapse"
+    data-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false"
+    aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+    </button>
+    </div>
+    </div>
+    </header>
+
+    <article class="content px-4">
+    @Body
+    </article>
+    </main>
+    </div>*@
+
+
+    @code {
+    private bool collapseNavMenu = true;
+
+    private string? NavMenuCssClass => collapseNavMenu ? "collapse" : null;
+
+    private void ToggleNavMenu()
+    {
+        collapseNavMenu = !collapseNavMenu;
+    }
+}

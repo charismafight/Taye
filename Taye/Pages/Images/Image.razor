@@ -1,0 +1,31 @@
+﻿@using Taye.Pages.Components
+@page "/image"
+
+<GridContent>
+    <Row Type="flex" Gutter="24">
+        @if (!Archives.Any())
+        {
+            <a>there is no archives right now</a>
+        }
+        else
+        {
+            @foreach (var ar in Archives)
+            {
+                <AntDesign.Col Xs="24" Sm="12" Md="8" Lg="6" Xl="4" Style="margin-bottom: 12px;">
+                    <ImageCard Archive=ar>
+                        <Footer>
+                            footer
+                        </Footer>
+                    </ImageCard>
+                </AntDesign.Col>
+            }
+        }
+
+    </Row>
+</GridContent>
+
+@if (Archives.Any())
+{
+    <Pagination DefaultCurrent="1" PageSize="@PageParam.PageSize" Total="@PageParam.Total" OnChange="@QueryWithPagination" HideOnSinglePage="true" />
+}
+

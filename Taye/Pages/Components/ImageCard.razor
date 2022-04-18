@@ -1,0 +1,31 @@
+﻿@namespace Taye.Pages.Components
+@inherits AntDomComponentBase
+
+    @*        <div class="content" style="height: @(string.IsNullOrEmpty(ContentHeight) ? "auto" : ContentHeight+"px")">
+    <div class="@(string.IsNullOrEmpty(ContentHeight) ? "" : "contentFixed")">@ChildContent</div>
+    </div>*@
+<Card Hoverable>
+    <Cover>
+        @Cover
+    </Cover>
+    <ChildContent>
+        <CardMeta Title="@Archive.Title" Description="@Archive.Description" />
+    </ChildContent>
+    <ActionTemplate>
+        @*
+        <CardAction>
+            <Icon Type="heart" Theme="@(Liked?"fill":"outline")" Height="2em" Width="2em" Style="color: red;" OnClick=@HeartClick />
+        </CardAction>*@
+    </ActionTemplate>
+</Card>
+
+@code
+{
+    private RenderFragment Cover =@<img alt="example"  src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png" />
+    ;
+
+    //private void HeartClick()
+    //{
+    //    Liked = !Liked;
+    //}
+}

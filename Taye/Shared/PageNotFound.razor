@@ -1,0 +1,18 @@
+﻿@namespace Taye
+@page "/404"
+@inject NavigationManager NavManager
+
+<Result Status="404"
+        Title="404"
+        SubTitle="Sorry, the page you visited does not exist.">
+    <Extra>
+        <Button Type="primary" OnClick="GoHome">Back Home</Button>
+    </Extra>
+</Result>
+
+@code {
+    void GoHome()
+    {
+        NavManager.NavigateTo("/");
+    }
+}

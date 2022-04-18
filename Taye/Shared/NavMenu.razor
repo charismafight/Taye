@@ -1,0 +1,67 @@
+﻿<AntDesign.Layout Class="layout">
+    <Header>
+        <div class="logo">
+            <a href="#" class="d-flex align-items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none"
+                     stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                     class="mr-2">
+                    <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z">
+                    </path>
+                    <circle cx="12" cy="13" r="4"></circle>
+                </svg>
+                <font size="3">李太一的小破站</font>
+            </a>
+        </div>
+        <Menu Theme="MenuTheme.Dark" Mode="MenuMode.Horizontal" DefaultSelectedKeys=@(new[]{"home"})>
+            <MenuItem Key="home" RouterLink="counter">站点简介</MenuItem>
+            <MenuItem Key="pic">照 片</MenuItem>
+            <MenuItem Key="video">视 频</MenuItem>
+        </Menu>
+    </Header>
+    <Content Style="padding: 0 50px;">
+        <div class="site-layout-content">Content</div>
+    </Content>
+    <Footer Style="text-align: center; ">Taye ©2022 Created by Lee</Footer>
+</AntDesign.Layout>
+
+@*<div class="top-row ps-3 navbar navbar-dark">
+    <div class="container-fluid">
+    <a class="navbar-brand" href="">太一的小破站</a>
+    <button title="Navigation menu" class="navbar-toggler" @onclick="ToggleNavMenu">
+    <span class="navbar-toggler-icon"></span>
+    </button>
+    </div>
+    </div>
+
+    <div class="@NavMenuCssClass" @onclick="ToggleNavMenu">
+    <nav class="flex-column">
+    <div class="nav-item px-3">
+    <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
+    <span class="oi oi-home" aria-hidden="true"></span> Home
+    </NavLink>
+    </div>
+    <div class="nav-item px-3">
+    <NavLink class="nav-link" href="counter">
+    <span class="oi oi-plus" aria-hidden="true"></span> 照 片
+    </NavLink>
+    </div>
+    <div class="nav-item px-3">
+    <NavLink class="nav-link" href="fetchdata">
+    <span class="oi oi-list-rich" aria-hidden="true"></span> 视 频
+    </NavLink>
+
+    <Button Type="primary">Hello World!</Button>
+    </div>
+    </nav>
+    </div>*@
+
+@code {
+    private bool collapseNavMenu = true;
+
+    private string? NavMenuCssClass => collapseNavMenu ? "collapse" : null;
+
+    private void ToggleNavMenu()
+    {
+        collapseNavMenu = !collapseNavMenu;
+    }
+}

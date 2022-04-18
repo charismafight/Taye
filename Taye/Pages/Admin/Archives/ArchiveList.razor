@@ -1,0 +1,49 @@
+﻿@page "/admin/archive"
+@namespace Taye.Pages.Admin.Archives
+@using Taye.Models
+@layout AdminLayout
+@inherits BaseRazor
+
+
+<Table @ref="table"
+       TItem="Archive"
+       DataSource="@Archives"
+       Total="@PageParam.Total"
+       @bind-PageIndex="PageParam.PageIndex"
+       @bind-PageSize="@PageParam.PageSize"
+       @bind-SelectedRows="@selectedRows">
+    <Selection Key="@(context.Id.ToString())" />
+    <AntDesign.Column @bind-Field="@context.Id" Sortable />
+    <AntDesign.Column @bind-Field="@context.Title" />
+    <AntDesign.Column @bind-Field="@context.Description" />
+    <AntDesign.Column @bind-Field="@context.PubDate" Format="yyyy-MM-dd" Sortable />
+    <ActionColumn>
+        <Space>
+            <SpaceItem><Button Type="@ButtonType.Primary" OnClick="()=>Detail(context.Id)">详 情</Button></SpaceItem>
+            <SpaceItem>
+                <Popconfirm Title="是否确定删除该记录？"
+                            OnConfirm="()=>Delete(context)"
+                            OnCancel="Cancel"
+                            OkText="确定"
+                            CancelText="取消">
+                    <Button Danger>删 除</Button>
+                </Popconfirm>
+            </SpaceItem>
+        </Space>
+    </ActionColumn>
+</Table>
+
+<br />
+<p>PageIndex: @PageParam.PageIndex | PageSize: @PageParam.PageSize | Total: @PageParam.Total</p>
+
+<br />
+<h5>selections:</h5>
+@if (selectedRows != null && selectedRows.Any())
+{
+    <Button Danger Size="small" OnClick="@(e => { selectedRows = null; })">Clear</Button>
+
+    @foreach (var selected in selectedRows)
+    {
+        <Tag @key="selected.Id" Closable OnClose="e=>RemoveSelection(selected.Id)">@selected.Id - @selected.Title</Tag>
+    }
+}
