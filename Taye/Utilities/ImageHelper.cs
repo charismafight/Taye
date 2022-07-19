@@ -118,6 +118,11 @@ namespace Taye.Utilities
         /// <param name="flag">生成的图片质量，0-100，默认80</param>
         public static void CompressImgFile(int dWidth, int dHeight, string filePath, string outFilePath, int flag = 80)
         {
+            if (!IsImage(filePath))
+            {
+                return;
+            }
+
             System.Drawing.Image iSource = System.Drawing.Image.FromFile(filePath);
             //检测图片是否有旋转
             foreach (var item in iSource.PropertyItems)
@@ -226,5 +231,17 @@ namespace Taye.Utilities
             }
         }
 
+        public static bool IsImage(string path)
+        {
+            try
+            {
+                Image img = Image.FromFile(path);
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+        }
     }
 }

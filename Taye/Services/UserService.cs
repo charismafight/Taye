@@ -1,4 +1,5 @@
-﻿using System.Net.Http;
+﻿using Microsoft.AspNetCore.Identity;
+using System.Net.Http;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
 using Taye.Models;
@@ -7,7 +8,7 @@ namespace Taye.Services
 {
     public interface IUserService
     {
-        Task<User> GetCurrentUserAsync();
+        Task<IdentityUser> GetCurrentUserAsync();
     }
 
     public class UserService : IUserService
@@ -19,9 +20,9 @@ namespace Taye.Services
             _httpClient = httpClient;
         }
 
-        public async Task<User> GetCurrentUserAsync()
+        public async Task<IdentityUser> GetCurrentUserAsync()
         {
-            return new User();
+            return new IdentityUser();
         }
     }
 }

@@ -5,6 +5,8 @@ VisualStudioVersion = 17.0.32126.317
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Taye", "Taye\Taye.csproj", "{B26E919F-9D12-476F-98C1-BE12A7DA161B}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Taye.Tests", "Taye.Tests\Taye.Tests.csproj", "{AD489B50-CB48-407C-A4E8-B83AC63EDF1B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{B26E919F-9D12-476F-98C1-BE12A7DA161B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B26E919F-9D12-476F-98C1-BE12A7DA161B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B26E919F-9D12-476F-98C1-BE12A7DA161B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AD489B50-CB48-407C-A4E8-B83AC63EDF1B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AD489B50-CB48-407C-A4E8-B83AC63EDF1B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AD489B50-CB48-407C-A4E8-B83AC63EDF1B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AD489B50-CB48-407C-A4E8-B83AC63EDF1B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

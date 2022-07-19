@@ -1,5 +1,6 @@
 ﻿using AntDesign;
 using Microsoft.AspNetCore.Components;
+using Microsoft.EntityFrameworkCore;
 using Taye.Models;
 using Taye.Pages.Components;
 using Taye.Repositories;
@@ -34,6 +35,8 @@ namespace Taye.Pages.Images
             PageParam.Total = Context.Archives.Count();
 
             Archives = Context.Archives
+                .Include(a => a.MediaFile)
+                .Where(p => p.MediaFile.FileType == Enums.FileType.Image)
                 .OrderByDescending(p => p.PubDate)
                 .Skip(PageParam.PageSize * (PageParam.PageIndex - 1))
                 .Take(PageParam.PageSize)

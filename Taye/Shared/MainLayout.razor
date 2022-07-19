@@ -18,10 +18,13 @@
                         <font size="3">李太一的小破站</font>
                     </a>
                 </div>
+                <div class="login">
+                    <LoginDisplay></LoginDisplay>
+                </div>
                 <Menu Theme="MenuTheme.Dark" Mode="MenuMode.Horizontal" DefaultSelectedKeys=@(new[]{"video"})>
                     <MenuItem Key="home" RouterLink="/">站点简介</MenuItem>
                     <MenuItem Key="pic" RouterLink="image">照 片</MenuItem>
-                    <MenuItem Key="video" RouterLink="fetchdata">视 频</MenuItem>
+                    <MenuItem Key="video" RouterLink="video">视 频</MenuItem>
                 </Menu>
             </Header>
             <Content Style="padding: 50px 50px;">
@@ -96,7 +99,7 @@
     </div>*@
 
 
-    @code {
+@code {
     private bool collapseNavMenu = true;
 
     private string? NavMenuCssClass => collapseNavMenu ? "collapse" : null;

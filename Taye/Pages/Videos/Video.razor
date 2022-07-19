@@ -1,0 +1,20 @@
+﻿@page "/video"
+
+<Row Gutter="(16, 16)">
+    @if (!Archives.Any())
+    {
+        <a>there is no archives right now</a>
+    }
+    else
+    {
+        @foreach (var ar in Archives)
+        {
+            <VideoTile Archive="ar"></VideoTile>
+        }
+    }
+</Row>
+
+@if (Archives.Any())
+{
+    <Pagination DefaultCurrent="1" PageSize="@PageParam.PageSize" Total="@PageParam.Total" OnChange="@QueryWithPagination" HideOnSinglePage="true" />
+}

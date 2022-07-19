@@ -28,7 +28,6 @@ namespace Taye.Pages.Admin.Archives
             {
                 PageIndex = 1,
                 PageSize = 10,
-                Total = 0
             };
 
             Query();
@@ -42,6 +41,7 @@ namespace Taye.Pages.Admin.Archives
                 .Skip(PageParam.PageSize * (PageParam.PageIndex - 1))
                 .Take(PageParam.PageSize)
                 .ToList();
+            PageParam.Total = Context.Archives.Count();
         }
 
         public void RemoveSelection(int id)
@@ -67,6 +67,11 @@ namespace Taye.Pages.Admin.Archives
         void Cancel()
         {
 
+        }
+
+        void Add()
+        {
+            NavManager.NavigateTo($"/admin/archive/new");
         }
 
         void Detail(int id)

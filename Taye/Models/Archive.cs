@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Identity;
+using System.ComponentModel.DataAnnotations;
 using Taye.Enums;
 
 namespace Taye.Models
@@ -16,6 +17,6 @@ namespace Taye.Models
 
         public DateTime? ShootDate { get; set; }
 
-        public User Author { get; set; }
+        public IdentityUser<int> Author { get; set; }
     }
 }

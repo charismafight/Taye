@@ -9,5 +9,9 @@
         public readonly static string MediaFullPath = Path.Combine(FileRootPath, MediaDirectory);
 
         public readonly static string ThumbPrefix = "Thumb_";
+
+        public readonly static string ImageFileSufix = ".jpg";
+
+        public readonly static string VideoFileSufix = ".mp4";
     }
 }

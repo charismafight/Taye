@@ -11,11 +11,11 @@
     "Taye": {
       "commandName": "Project",
       "launchBrowser": true,
-      "launchUrl": "admin/archive/1",
+      "launchUrl": "video",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
-      "applicationUrl": "https://localhost:7124;http://localhost:5124",
+      "applicationUrl": "https://localhost:9124;http://localhost:8124",
       "dotnetRunMessages": true
     },
     "IIS Express": {

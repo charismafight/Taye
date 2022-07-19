@@ -73,7 +73,7 @@ namespace Taye.Pages.Admin.Archives
                 Id = 0;
             }
 
-            var testUser = Context.Users.Single(o => o.Id == 3);
+            var testUser = Context.Users.Single(o => o.Id == 1);
 
             if (Archive == null)
             {
@@ -109,7 +109,7 @@ namespace Taye.Pages.Admin.Archives
 
             UploadedFile = e.File;
 
-            if (UploadedFile.Name.EndsWith(".jpg") || UploadedFile.Name.EndsWith(".mp4"))
+            if (UploadedFile.Name.EndsWith(Constants.ImageFileSufix) || UploadedFile.Name.EndsWith(Constants.VideoFileSufix))
             {
                 try
                 {
@@ -129,6 +129,7 @@ namespace Taye.Pages.Admin.Archives
                     //确认文件是否有重复
                     if (FileHelper.FileExists(Constants.MediaFullPath, UploadFileMd5Name))
                     {
+                        //重复就移除上传的这个文件
                         FileHelper.RemoveFile(UploadFileFullName);
                     }
                     else
@@ -136,11 +137,10 @@ namespace Taye.Pages.Admin.Archives
                         //不重复就rename成md码+后缀形式
                         FileHelper.Rename(UploadFileFullName, UploadFileInfo, UploadFileMd5Name);
                     }
+
                     PreviewFileFullName = Path.Combine(Constants.MediaDirectory, UploadFileMd5Name);
 
-                    //构造文件缩略图
-                    PreviewThumbnailFullName = Path.Combine(Constants.MediaDirectory, UploadFileMd5ThumbName);
-                    ImageHelper.CompressImgFile(200, 200, Path.Combine(Constants.FileRootPath, PreviewFileFullName), Path.Combine(Constants.FileRootPath, PreviewThumbnailFullName));
+                    await GenerateThumbnail(PreviewFileFullName);
 
                     shouldRender = true;
                 }
@@ -156,6 +156,22 @@ namespace Taye.Pages.Admin.Archives
             }
         }
 
+        async Task GenerateThumbnail(string fileName)
+        {
+            PreviewThumbnailFullName = Path.Combine(Constants.MediaDirectory, UploadFileMd5ThumbName);
+            if (fileName.EndsWith(Constants.ImageFileSufix))
+            {
+                //构造文件缩略图
+                ImageHelper.CompressImgFile(200, 200, Path.Combine(Constants.FileRootPath, PreviewFileFullName), Path.Combine(Constants.FileRootPath, PreviewThumbnailFullName));
+            }
+            else if (fileName.EndsWith(Constants.VideoFileSufix))
+            {
+                //.mp4->png
+                PreviewThumbnailFullName = PreviewThumbnailFullName.Replace(".mp4", ".jpg");
+                await VideoHelper.GetFrame(Path.Combine(Constants.FileRootPath, PreviewFileFullName), PreviewThumbnailFullName);
+            }
+        }
+
         private async void HandleSubmit()
         {
             if (UploadedFile == null)
@@ -164,13 +180,18 @@ namespace Taye.Pages.Admin.Archives
                 return;
             }
 
-            SaveArchive();
-            Context.SaveChanges();
+            DoWithLoading(() =>
+            {
+                Thread.Sleep(10000);
+                SaveArchive();
+                Context.SaveChanges();
+            });
+
             await ShowSuccess();
             NavManager.NavigateTo("/admin/archive");
         }
 
-        async Task SaveArchive()
+        void SaveArchive()
         {
             //判断重复，相同文件直接修改指向
             if (Context.UploadFiles.Any(p => p.MD5 == UploadFileMd5))
@@ -184,9 +205,9 @@ namespace Taye.Pages.Admin.Archives
                     MD5 = UploadFileMd5,
                     Name = UploadedFile.Name,
                     FilePath = Path.Combine(Constants.MediaDirectory, UploadFileMd5Name),
-                    FileType = UploadedFile.Name.EndsWith(".jpg") ? FileType.Image : FileType.Video,
+                    FileType = UploadedFile.Name.EndsWith(Constants.ImageFileSufix) ? FileType.Image : FileType.Video,
                     Size = UploadedFile.Size,
-                    ThumbnailFilePath = Path.Combine(Constants.MediaDirectory, UploadFileMd5ThumbName)
+                    ThumbnailFilePath = PreviewThumbnailFullName
                 };
             }
         }

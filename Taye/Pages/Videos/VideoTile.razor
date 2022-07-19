@@ -1,0 +1,16 @@
+﻿@using Models
+
+<Col Span="6">
+<video muted="muted" onMouseOver="this.play()" onMouseOut="this.pause()" style="width:400px; height:300px; object-fit: fill">
+    <source src="@Archive.MediaFile.FilePath" type="video/mp4" />
+    您的浏览器暂不支持播放该视频，请升级至最新版浏览器。
+</video>
+<p class="card-text">@Archive.Description</p>
+<p class="card-text">@Archive.Title</p>
+</Col>
+
+
+@code {
+    [Parameter]
+    public Archive Archive { get; set; }
+}

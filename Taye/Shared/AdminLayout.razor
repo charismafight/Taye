@@ -2,22 +2,52 @@
 @inherits LayoutComponentBase
 @using System.Text.Json
 
-<AntDesign.ProLayout.BasicLayout MenuData="_menuData" Title="太一的后台管理">
-    <RightContentRender>
-        <Taye.Components.RightContent />
-    </RightContentRender>
-    <ChildContent>
-        @Body
-    </ChildContent>
-    <FooterRender>
-        <FooterView Copyright="2021 Ant Design Blazor" Links="Links"></FooterView>
-    </FooterRender>
-</AntDesign.ProLayout.BasicLayout>
-<SettingDrawer />
+<AuthorizeView Roles="Admin">
+    <Authorized>
+        <AntDesign.ProLayout.BasicLayout MenuData="_menuData" Title="太一的后台管理" BaseURL="/admin" IconfontUrl="/admin">
+            <RightContentRender>
+            </RightContentRender>
+            <ChildContent>
+                @Body
+            </ChildContent>
+            <FooterRender>
+                <FooterView Copyright="2022 Taye" Links="Links"></FooterView>
+            </FooterRender>
+        </AntDesign.ProLayout.BasicLayout>
+        <SettingDrawer />
+    </Authorized>
+    <NotAuthorized>
+        <RedirectToLogin></RedirectToLogin>
+    </NotAuthorized>
+</AuthorizeView>
+@*<AuthorizeView Roles="Admin">
+    <Authorized>
+        <AntDesign.ProLayout.BasicLayout MenuData="_menuData" Title="太一的后台管理">
+            <RightContentRender>
+                <Taye.Components.RightContent />
+            </RightContentRender>
+            <ChildContent>
+                welcome admin
+                @Body
+            </ChildContent>
+            <FooterRender>
+                <FooterView Copyright="2021 Ant Design Blazor" Links="Links"></FooterView>
+            </FooterRender>
+        </AntDesign.ProLayout.BasicLayout>
+        <SettingDrawer />
+    </Authorized>
+    <NotAuthorized>
+        <RedirectToLogin></RedirectToLogin>
+    </NotAuthorized>
+</AuthorizeView>*@
 
 @code
 {
-    private MenuDataItem[] _menuData = { new MenuDataItem { Path = "/admin/login", Name = "Dashboard", Key = "dashboard", Icon = "dashboard" } };
+    private MenuDataItem[] _menuData =
+    {
+        new MenuDataItem { Path = "/admin", Name = "Dashboard", Key = "dashboard", Icon = "dashboard" },
+        new MenuDataItem { Path = "/admin/archive", Name = "Archives", Key = "Archives", Icon = "database" }
+    };
 
     protected override async Task OnInitializedAsync()
     {
@@ -28,23 +58,9 @@
                 {
         new LinkItem
         {
-            Key = "Ant Design Blazor",
-            Title = "Ant Design Blazor",
-            Href = "https://antblazor.com",
-            BlankTarget = true,
-        },
-        new LinkItem
-        {
             Key = "github",
             Title = "github",
-            Href = "https://github.com/ant-design-blazor/ant-design-pro-blazor",
-            BlankTarget = true,
-        },
-        new LinkItem
-        {
-            Key = "Blazor",
-            Title = "Blazor",
-            Href = "https://dotnet.microsoft.com/apps/aspnet/web-apps/blazor?WT.mc_id=DT-MVP-5003987",
+            Href = "https://github.com/charismafight/Taye",
             BlankTarget = true,
         }
     };

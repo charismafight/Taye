@@ -76,6 +76,12 @@ a, .btn-link {
     float: left;
 }
 
+.login {
+    width: auto;
+    height: auto;
+    float: right;
+}
+
 .footer {
     /*background: rgba(255, 255, 255, 0.2);*/
     background-color:black;

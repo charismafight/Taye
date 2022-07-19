@@ -18,6 +18,8 @@ namespace Taye.Pages
         [Inject]
         protected MessageService Message { get; set; }
 
+        protected bool Loading = false;
+
         protected async Task<NotificationRef> ShowSuccess(string msg = "")
         {
             if (string.IsNullOrWhiteSpace(msg))
@@ -44,6 +46,13 @@ namespace Taye.Pages
                 Message = msg,
                 NotificationType = NotificationType.Error
             });
+        }
+
+        protected async void DoWithLoading(Action action)
+        {
+            Loading = true;
+            await Task.Run(action);
+            Loading = false;
         }
     }
 }
